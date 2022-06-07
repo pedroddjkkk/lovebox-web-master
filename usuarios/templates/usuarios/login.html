@@ -1,0 +1,65 @@
+{% extends 'paginas/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+<style>
+    .button {
+        border: none;
+        border-radius: 8px;
+        color: white;
+        padding: 12px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color: #4CAF50;
+    }
+</style>
+
+<div class="row">
+
+    {% if request.user.is_authenticated %}
+    <div class="col-md-8 mx-auto">
+        <h3>Ação não permitida</h3>
+        <hr>
+        <p class="lead">
+            <strong>
+                Você não tem permissão para acessar este conteúdo!
+            </strong>
+        </p>
+    </div>
+    {% else %}
+
+    <div class="col-md-4 mx-auto">
+
+
+        <h2 class="mt-4 mb-4 border-bottom pb-2">
+            Login
+        </h2>
+        <div class="form-group">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form|crispy }}
+
+                <hr class="">
+
+                <button type="submit" class="button">
+                    Entrar
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

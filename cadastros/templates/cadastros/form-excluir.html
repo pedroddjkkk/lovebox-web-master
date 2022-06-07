@@ -1,0 +1,29 @@
+{% extends 'paginas/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+    <h2 class="mt-4 mb-4 border-bottom pb-2">
+        Excluir Registro
+    </h2>
+
+    <form method="POST">
+
+        <p>
+            Deseja excluir o registro: <b>{{ object }}</b>?
+        </p>
+
+        {% csrf_token %}
+        
+        {{ form|crispy }}
+
+        <hr class="">
+        
+        <button type="submit" class="btn btn-danger">Excluir</button>
+
+    </form>
+
+{% endblock %}
