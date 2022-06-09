@@ -1,4 +1,4 @@
-from .models import Cidade, Estado, Paciente, Medicamento, ProfissionalSaude, Cuidador
+from .models import Cidade, Estado, Paciente, Medicamento, ProfissionalSaude, Cuidador, Tratamento
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from braces.views import GroupRequiredMixin
 
-from .forms import PacienteForm, MedicamentoForm, ProfissionalSaudeForm, CuidadorForm
+from .forms import PacienteForm, MedicamentoForm, ProfissionalSaudeForm, CuidadorForm, TratamentoForm
 
 
 class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -239,3 +239,40 @@ class CuidadorDelete(LoginRequiredMixin, DeleteView):
 class CuidadorList(LoginRequiredMixin, ListView):
     model = Cuidador
     template_name = 'cadastros/listas/cuidador.html'
+
+# Tratamento
+
+class TratamentoCreate(LoginRequiredMixin, CreateView):
+    model= Tratamento
+    form_class = TratamentoForm
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-tratamento')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Cadastro de Tratamento'
+        context['botao'] = 'Cadastrar'
+        context['cor'] = 'success'
+        return context 
+
+class TratamentoUpdate(LoginRequiredMixin, UpdateView):
+    model= Tratamento
+    form_class = TratamentoForm
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-tratamento')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar Tratamento'
+        context['botao'] = 'Salvar'
+        context['cor'] = 'success'
+        return context 
+
+class TratamentoDelete(LoginRequiredMixin, DeleteView):
+    model = Tratamento
+    template_name = 'cadastros/form-excluir.html'
+    success_url = reverse_lazy('listar-tratamento')
+
+class TratamentoList(LoginRequiredMixin, ListView):
+    model = Tratamento
+    template_name = 'cadastros/listas/tratamento.html'

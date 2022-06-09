@@ -3,7 +3,8 @@ from django.urls import path
 from .views import CidadeDelete, CidadeList, CidadeUpdate, EstadoCreate, CidadeCreate, EstadoUpdate, EstadoDelete, EstadoList
 from .views import PacienteCreate,PacienteDelete, PacienteList, PacienteUpdate, MedicamentoCreate, MedicamentoUpdate, MedicamentoDelete, MedicamentoList
 from .views import ProfissionalSaudeCreate, ProfissionalSaudeUpdate, ProfissionalSaudeList, ProfissionalSaudeDelete
-from .views import CuidadorCreate, CuidadorUpdate, CuidadorList, CuidadorDelete
+from .views import CuidadorCreate, CuidadorUpdate, CuidadorList, CuidadorDelete, TratamentoCreate, TratamentoUpdate, TratamentoList, TratamentoDelete
+
 
 
 urlpatterns = [
@@ -36,4 +37,9 @@ urlpatterns = [
     path('editar/cuidador/<int:pk>/', CuidadorUpdate.as_view(), name='editar-cuidador'),
     path('excluir/cuidador/<int:pk>/', CuidadorDelete.as_view(), name='excluir-cuidador'),
     path('listar/cuidador/', CuidadorList.as_view(), name='listar-cuidador'),
+
+    path('inserir/tratamento/', TratamentoCreate.as_view(), name='cadastrar-tratamento'),
+    path('editar/tratamento/<int:pk>/', TratamentoUpdate.as_view(), name='editar-tratamento'),
+    path('excluir/tratamento/<int:pk>/', TratamentoDelete.as_view(), name='excluir-tratamento'),
+    path('listar/tratamento/', TratamentoList.as_view(), name='listar-tratamento'),
 ]
