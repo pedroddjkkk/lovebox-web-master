@@ -4,6 +4,7 @@ from .views import CidadeDelete, CidadeList, CidadeUpdate, EstadoCreate, CidadeC
 from .views import PacienteCreate,PacienteDelete, PacienteList, PacienteUpdate, MedicamentoCreate, MedicamentoUpdate, MedicamentoDelete, MedicamentoList
 from .views import ProfissionalSaudeCreate, ProfissionalSaudeUpdate, ProfissionalSaudeList, ProfissionalSaudeDelete
 from .views import CuidadorCreate, CuidadorUpdate, CuidadorList, CuidadorDelete, TratamentoCreate, TratamentoUpdate, TratamentoList, TratamentoDelete
+from .views import LoveboxCreate,LoveboxUpdate,LoveboxList,LoveboxDelete
 
 
 
@@ -42,4 +43,9 @@ urlpatterns = [
     path('editar/tratamento/<int:pk>/', TratamentoUpdate.as_view(), name='editar-tratamento'),
     path('excluir/tratamento/<int:pk>/', TratamentoDelete.as_view(), name='excluir-tratamento'),
     path('listar/tratamento/', TratamentoList.as_view(), name='listar-tratamento'),
+
+    path('inserir/lovebox/', LoveboxCreate.as_view(), name='cadastrar-lovebox'),
+    path('editar/lovebox/<int:pk>/', LoveboxUpdate.as_view(), name='editar-lovebox'),
+    path('excluir/lovebox/<int:pk>/', LoveboxDelete.as_view(), name='excluir-lovebox'),
+    path('listar/lovebox/', LoveboxList.as_view(), name='listar-lovebox'),
 ]

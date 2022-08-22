@@ -1,4 +1,4 @@
-from .models import Cidade, Estado, Paciente, Medicamento, ProfissionalSaude, Cuidador, Tratamento
+from .models import Cidade, Estado, Paciente, Medicamento, ProfissionalSaude, Cuidador, Tratamento, Lovebox
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from braces.views import GroupRequiredMixin
 
-from .forms import PacienteForm, MedicamentoForm, ProfissionalSaudeForm, CuidadorForm, TratamentoForm
+from .forms import PacienteForm, MedicamentoForm, ProfissionalSaudeForm, CuidadorForm, TratamentoForm, LoveboxForm
 
 
 class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
@@ -178,7 +178,7 @@ class ProfissionalSaudeCreate(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Cadastro de Profissional da Saúde'
         context['botao'] = 'Cadastrar'
-        context['cor'] = 'success'
+        context['cor'] = 'primary'
         return context 
 
 class ProfissionalSaudeUpdate(LoginRequiredMixin, UpdateView):
@@ -215,7 +215,7 @@ class CuidadorCreate(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Cadastro de Cuidador'
         context['botao'] = 'Cadastrar'
-        context['cor'] = 'success'
+        context['cor'] = 'primary'
         return context 
 
 class CuidadorUpdate(LoginRequiredMixin, UpdateView):
@@ -252,7 +252,7 @@ class TratamentoCreate(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Cadastro de Tratamento'
         context['botao'] = 'Cadastrar'
-        context['cor'] = 'success'
+        context['cor'] = 'primary'
         return context 
 
 class TratamentoUpdate(LoginRequiredMixin, UpdateView):
@@ -276,3 +276,40 @@ class TratamentoDelete(LoginRequiredMixin, DeleteView):
 class TratamentoList(LoginRequiredMixin, ListView):
     model = Tratamento
     template_name = 'cadastros/listas/tratamento.html'
+
+#Lovebox
+
+class LoveboxCreate(LoginRequiredMixin, CreateView):
+    model= Lovebox
+    form_class = LoveboxForm
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-lovebox')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Cadastro de Lovebox'
+        context['botao'] = 'Cadastrar'
+        context['cor'] = 'primary'
+        return context 
+
+class LoveboxUpdate(LoginRequiredMixin, UpdateView):
+    model= Lovebox
+    form_class = LoveboxForm
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-lovebox')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar Lovebox'
+        context['botao'] = 'Salvar'
+        context['cor'] = 'success'
+        return context 
+
+class LoveboxDelete(LoginRequiredMixin, DeleteView):
+    model = Lovebox
+    template_name = 'cadastros/form-excluir.html'
+    success_url = reverse_lazy('listar-lovebox')
+
+class LoveboxList(LoginRequiredMixin, ListView):
+    model = Lovebox
+    template_name = 'cadastros/listas/lovebox.html'

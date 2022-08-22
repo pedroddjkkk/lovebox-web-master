@@ -1,3 +1,4 @@
+@@ -0,0 +1,52 @@
 {% extends 'paginas/modelo.html' %}
 
 {% load static %}
@@ -16,7 +17,7 @@
 
         {% csrf_token %}
 
-        {% crispy form %}
+        {{ form|crispy }}
 
         <hr class="">
 
@@ -49,4 +50,4 @@
     });
 </script>
 
-{% endblock %}
+{% endblock %} 
