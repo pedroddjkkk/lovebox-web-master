@@ -1,5 +1,7 @@
 from django import forms
 from .models import Paciente, Medicamento, ProfissionalSaude, Cuidador, Tratamento
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Row, Column, Fieldset, ButtonHolder, Div, HTML
 
 
 class PacienteForm(forms.ModelForm):
@@ -20,8 +22,33 @@ class MedicamentoForm(forms.ModelForm):
         model = Medicamento
         fields = '__all__'
         widgets = {
-
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('nome_comercial', css_class='form-group col-lg mb-0'),
+                Column('laboratorio', css_class='form-group col-lg mb-0'),
+                Column('principio_ativo', css_class='form-group col-lg mb-0'),
+            ),
+            Row(
+                Column('dose_diaria_maxima',
+                        css_class='form-group col-lg mb-0'),
+                Column('forma_farmaceutica',
+                        css_class='form-group col-lg mb-0'),
+                Column('concentracao', css_class='form-group col-lg mb-0'),
+            ),
+            Row(
+                Column('via_administracao',
+                        css_class='form-group col-lg mb-0'),
+                Column('grupo_etario',
+                        css_class='form-group col-lg mb-0'),
+                Column('tarja', css_class='form-group col-lg mb-0'),
+            ),
+        )  # Fim do layout
 
 class ProfissionalSaudeForm(forms.ModelForm):
     class Meta:
@@ -53,3 +80,5 @@ class TratamentoForm(forms.ModelForm):
             'cadastrado_em': forms.DateTimeInput(attrs={'type': 'date','class': 'cadastrado_emClass'},format='%Y-%m-%d %H:%M'),
             'atualizado_em': forms.DateTimeInput(attrs={'type': 'date','class': 'atualizado_emClass'},format='%Y-%m-%d %H:%M')
         }
+
+    

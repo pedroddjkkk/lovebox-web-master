@@ -1,4 +1,4 @@
-from tabnanny import verbose
+
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
@@ -91,7 +91,7 @@ class ProfissionalSaude(models.Model):
     def __str__(self):
         return "{}".format(self.nome)
 
-class CategoriaParceiro(models.Model): #Essa entidade não poderia ser um atributo de Parceiros?
+class CategoriaParceiro(models.Model):
     categoria = models.CharField(max_length=100)
 
 class Parceiro(models.Model):
@@ -207,7 +207,7 @@ class DosesTratamento(models.Model): #Falta alguns atributos
 
     tratamento = models.ForeignKey(Tratamento,on_delete= models.PROTECT)
 
-class Notificação(models.Model): #Complementer
+class Notificação(models.Model): #Complementar
     datetime = models.DateTimeField()
     status = models.CharField(max_length=7,
         choices=(
