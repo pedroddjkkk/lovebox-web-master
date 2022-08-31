@@ -1,0 +1,74 @@
+@@ -0,0 +1,52 @@
+<style>
+    .button {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid #008000;
+    background-color: rgb(255, 255, 255);
+    user-select: none;
+    color: #008000;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease 0s;
+    border-radius: 0.25rem;
+}
+</style>
+
+{% extends 'paginas/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+<h2 class="mt-4 mb-4 border-bottom pb-2">
+    {{ titulo }}
+</h2>
+
+<div class="form-group">
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form|crispy }}
+
+        <hr class="">
+
+        <button id="botaoLogin" class="sc-kTGBUR button">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="https://www.w3.org/2000/svg" class="IconLoginButton"><path fill-rule="evenodd" clip-rule="evenodd"></path><path fill-rule="evenodd" clip-rule="evenodd" fill="#ff6500"></path></svg>Cadastrar
+        </button>
+
+    </form>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'javascript/jquery.mask.min.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+            spOptions = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(SPMaskBehavior.apply({}, arguments), options);
+                }
+            };
+
+        $('#id_telefone').mask(SPMaskBehavior, spOptions);
+
+    });
+</script>
+
+{% endblock %} 
