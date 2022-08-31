@@ -69,14 +69,17 @@ class CuidadorForm(forms.ModelForm):
 class TratamentoForm(forms.ModelForm):
     class Meta:
         model = Tratamento
-        fields = '__all__'
+        fields = ['prescrito_por','data_prescricao','medicamento','concetracao','frequencia_diaria',
+        'horarios_diarios','quantidade_ingerir','unidade_medida','data_inicio','tipo_tratamento',
+        'periodo_tratamento','data_fim','tempo_alerta','observacao','lote','validade','embalagem_fracionavel',
+        'quantidade_total_embalagem','amostraGratis','status_tratamento','status_tratamento_data',
+        'paciente','atualizado_em']
         widgets = {
             'data_prescricao': forms.DateInput(attrs={'type': 'date','class': 'data_prescricaoClass','placeholder':'dd/mm/aaaa'},format='%Y-%m-%d'),
             'validade': forms.DateInput(attrs={'type': 'date','class': 'validadeClass','placeholder':'dd/mm/aaaa'},format='%Y-%m-%d'),
             'data_inicio': forms.DateTimeInput(attrs={'type': 'date','class': 'data_inicio_dataClass'},format='%Y-%m-%d %H:%M'),
             'data_fim': forms.DateTimeInput(attrs={'type': 'date','class': 'data_fim_dataClass'},format='%Y-%m-%d %H:%M'),
             'status_tratamento_data': forms.DateTimeInput(attrs={'type': 'date','class': 'status_tratamento_dataClass'},format='%Y-%m-%d %H:%M'),
-            'cadastrado_em': forms.DateTimeInput(attrs={'type': 'date','class': 'cadastrado_emClass'},format='%Y-%m-%d %H:%M'),
             'cadastrado_em': forms.DateTimeInput(attrs={'type': 'date','class': 'cadastrado_emClass'},format='%Y-%m-%d %H:%M'),
             'atualizado_em': forms.DateTimeInput(attrs={'type': 'date','class': 'atualizado_emClass'},format='%Y-%m-%d %H:%M')
         }

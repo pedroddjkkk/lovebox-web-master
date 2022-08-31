@@ -215,7 +215,7 @@ class Tratamento(models.Model):
         User, related_name='paciente_tratemento', on_delete=models.PROTECT)
     cadastrado_por = models.ForeignKey(
         User, related_name='cadastrado_por', on_delete=models.PROTECT)
-    cadastrado_em = models.DateTimeField()
+    cadastrado_em = models.DateTimeField(auto_now_add=True, blank=True)
     atualizado_em = models.DateTimeField()
 
 

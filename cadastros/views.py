@@ -11,6 +11,7 @@ from braces.views import GroupRequiredMixin
 
 from .forms import PacienteForm, MedicamentoForm, ProfissionalSaudeForm, CuidadorForm, TratamentoForm, LoveboxForm
 
+from django.shortcuts import get_object_or_404
 
 class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     group_required = u'Admin'
@@ -255,6 +256,13 @@ class TratamentoCreate(LoginRequiredMixin, CreateView):
         context['cor'] = 'primary'
         return context 
 
+    def form_valid(self, form):
+        form.instance.cadastrado_por = self.request.user
+
+        url = super().form_valid(form)
+
+        return url
+
 class TratamentoUpdate(LoginRequiredMixin, UpdateView):
     model= Tratamento
     form_class = TratamentoForm
@@ -266,16 +274,28 @@ class TratamentoUpdate(LoginRequiredMixin, UpdateView):
         context['titulo'] = 'Editar Tratamento'
         context['botao'] = 'Salvar'
         context['cor'] = 'success'
-        return context 
+        return context
+    
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Tratamento,pk=self.kwargs['pk'], cadastrado_por = self.request.user)
+        return self.object
 
 class TratamentoDelete(LoginRequiredMixin, DeleteView):
     model = Tratamento
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-tratamento')
 
+    def get_object(self, queryset=None):
+        self.object = get_object_or_404(Tratamento,pk=self.kwargs['pk'], cadastrado_por = self.request.user)
+        return self.object
+
 class TratamentoList(LoginRequiredMixin, ListView):
     model = Tratamento
     template_name = 'cadastros/listas/tratamento.html'
+
+    def get_queryset(self):
+        self.object_list = Tratamento.objects.filter(cadastrado_por = self.request.user)
+        return self.object_list
 
 #Lovebox
 
