@@ -33,11 +33,6 @@ class Cidade(models.Model):
     def __str__(self):
         return "{} ({})".format(self.nome, self.estado.sigla)
 
-
-class Fabricante(models.Model):
-    descricao = models.CharField(max_length=255, verbose_name='Descrição')
-
-
 class Cuidador(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     nome = models.CharField(max_length=100)
@@ -142,7 +137,7 @@ class Lovebox(models.Model):
     parceiro = models.ForeignKey(Parceiro,blank=True, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
-        return "{}".format(self.numSerie)
+        return "{}".format(self.num_serie)
 
 
 class Compartimento(models.Model):
@@ -150,6 +145,9 @@ class Compartimento(models.Model):
     ordem = models.IntegerField()
     descricao = models.CharField(max_length=255)
     lovebox = models.ForeignKey(Lovebox, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return "{}".format("Lovebox "+ str(self.lovebox) +" - "+ self.descricao)
 
 
 class Tratamento(models.Model):
@@ -213,11 +211,11 @@ class Tratamento(models.Model):
         verbose_name="Data da Atualização de Status", null=True, blank=True)
     paciente = models.ForeignKey(
         User, related_name='paciente_tratemento', on_delete=models.PROTECT)
+    compartimento = models.ForeignKey(Compartimento, on_delete=models.PROTECT)
     cadastrado_por = models.ForeignKey(
         User, related_name='cadastrado_por', on_delete=models.PROTECT)
     cadastrado_em = models.DateTimeField(auto_now_add=True, blank=True)
     atualizado_em = models.DateTimeField()
-
 
 class DosesTratamento(models.Model):  # Falta alguns atributos
     lovebox = models.CharField(max_length=100)
@@ -231,10 +229,10 @@ class DosesTratamento(models.Model):  # Falta alguns atributos
                                            (False, 'N')
                                        )
                                        )
-    status_sincronizacao_download = models.BooleanField
-    data_sincronizacao_download = models.DateTimeField
-    status_sincronização_upload = models.BooleanField
-    data_sincronizacao_upload = models.DateTimeField
+    status_sincronizacao_download = models.BooleanField(default=True)
+    data_sincronizacao_download = models.DateTimeField(null=True, blank=True)
+    status_sincronização_upload = models.BooleanField(default=False)
+    data_sincronizacao_upload = models.DateTimeField(null=True, blank=True)
     status_tratamento = models.BooleanField(default=True,
                                          choices=(
                                              (True, 'Ativo'),
@@ -245,16 +243,3 @@ class DosesTratamento(models.Model):  # Falta alguns atributos
     paciente = models.CharField(max_length=255)
     dosagem = models.CharField(max_length=255)
     medicamento = models.CharField(max_length=255)
-
-
-class Notificação(models.Model):  # Complementar
-    datetime = models.DateTimeField()
-    status = models.CharField(max_length=7,
-                              choices=(
-                                  ('ativo', 'Ativo'),
-                                  ('inativo', 'Inativa')
-                              )
-                              )
-
-    #contatoDoNotificado = cuidador.telefone
-

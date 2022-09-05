@@ -72,7 +72,7 @@ class TratamentoForm(forms.ModelForm):
         fields = ['prescrito_por','data_prescricao','medicamento','concetracao','frequencia_diaria',
         'horarios_diarios','quantidade_ingerir','unidade_medida','data_inicio','tipo_tratamento',
         'periodo_tratamento','data_fim','tempo_alerta','observacao','lote','validade','embalagem_fracionavel',
-        'quantidade_total_embalagem','amostraGratis','status_tratamento','status_tratamento_data',
+        'quantidade_total_embalagem','amostraGratis','status_tratamento','status_tratamento_data','compartimento',
         'paciente','atualizado_em']
         widgets = {
             'data_prescricao': forms.DateInput(attrs={'type': 'date','class': 'data_prescricaoClass','placeholder':'dd/mm/aaaa'},format='%Y-%m-%d'),
