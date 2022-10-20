@@ -1,4 +1,4 @@
-from .models import Cidade, Estado, Paciente, Medicamento, ProfissionalSaude, Cuidador, Tratamento, Lovebox
+from .models import Cidade, Estado, Paciente, Medicamento, ProfissionalSaude, Cuidador, Tratamento, Lovebox, DosesTratamento
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from braces.views import GroupRequiredMixin
 
-from .forms import PacienteForm, MedicamentoForm, ProfissionalSaudeForm, CuidadorForm, TratamentoForm, LoveboxForm
+from .forms import PacienteForm, MedicamentoForm, ProfissionalSaudeForm, CuidadorForm, TratamentoForm, LoveboxForm, DosesTratamentoForm
 
 from django.shortcuts import get_object_or_404
 
@@ -333,3 +333,40 @@ class LoveboxDelete(LoginRequiredMixin, DeleteView):
 class LoveboxList(LoginRequiredMixin, ListView):
     model = Lovebox
     template_name = 'cadastros/listas/lovebox.html'
+
+#DosesTratamento
+
+class DosesTratamentoCreate(LoginRequiredMixin, CreateView):
+    model= DosesTratamento
+    form_class = DosesTratamentoForm
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-lovebox')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Cadastro de DosesTratamento'
+        context['botao'] = 'Cadastrar'
+        context['cor'] = 'primary'
+        return context 
+
+class DosesTratamentoUpdate(LoginRequiredMixin, UpdateView):
+    model= DosesTratamento
+    form_class = DosesTratamentoForm
+    template_name = 'cadastros/form.html'
+    success_url = reverse_lazy('listar-doses-tratamento')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar Doses do Tratamento'
+        context['botao'] = 'Salvar'
+        context['cor'] = 'success'
+        return context 
+
+class DosesTratamentoDelete(LoginRequiredMixin, DeleteView):
+    model = DosesTratamento
+    template_name = 'cadastros/form-excluir.html'
+    success_url = reverse_lazy('listar-doses-tratamento')
+
+class DosesTratamentoList(LoginRequiredMixin, ListView):
+    model = DosesTratamento
+    template_name = 'cadastros/listas/doses-tratamento.html'

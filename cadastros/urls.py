@@ -4,7 +4,7 @@ from .views import CidadeDelete, CidadeList, CidadeUpdate, EstadoCreate, CidadeC
 from .views import PacienteCreate,PacienteDelete, PacienteList, PacienteUpdate, MedicamentoCreate, MedicamentoUpdate, MedicamentoDelete, MedicamentoList
 from .views import ProfissionalSaudeCreate, ProfissionalSaudeUpdate, ProfissionalSaudeList, ProfissionalSaudeDelete
 from .views import CuidadorCreate, CuidadorUpdate, CuidadorList, CuidadorDelete, TratamentoCreate, TratamentoUpdate, TratamentoList, TratamentoDelete
-from .views import LoveboxCreate,LoveboxUpdate,LoveboxList,LoveboxDelete
+from .views import LoveboxCreate,LoveboxUpdate,LoveboxList,LoveboxDelete, DosesTratamentoCreate,DosesTratamentoDelete,DosesTratamentoList,DosesTratamentoUpdate
 
 
 
@@ -48,4 +48,10 @@ urlpatterns = [
     path('editar/lovebox/<int:pk>/', LoveboxUpdate.as_view(), name='editar-lovebox'),
     path('excluir/lovebox/<int:pk>/', LoveboxDelete.as_view(), name='excluir-lovebox'),
     path('listar/lovebox/', LoveboxList.as_view(), name='listar-lovebox'),
+
+    path('inserir/doses-tratamento/', DosesTratamentoCreate.as_view(), name='cadastrar-doses-tratamento'),
+    path('editar/doses-tratamento/<int:pk>/', DosesTratamentoUpdate.as_view(), name='editar-doses-tratamento'),
+    path('excluir/doses-tratamento/<int:pk>/', DosesTratamentoDelete.as_view(), name='excluir-doses-tratamento'),
+    path('listar/doses-tratamento/', DosesTratamentoList.as_view(), name='listar-doses-tratamento'),
+
 ]

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Lovebox, Paciente, Medicamento, ProfissionalSaude, Cuidador, Tratamento
+from .models import DosesTratamento, Lovebox, Paciente, Medicamento, ProfissionalSaude, Cuidador, Tratamento
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Row, Column, Fieldset, ButtonHolder, Div, HTML
 
@@ -87,6 +87,14 @@ class TratamentoForm(forms.ModelForm):
 class LoveboxForm(forms.ModelForm):
     class Meta:
         model = Lovebox
+        fields = '__all__'
+        widgets = {
+        }
+    
+    
+class DosesTratamentoForm(forms.ModelForm):
+    class Meta:
+        model = DosesTratamento
         fields = '__all__'
         widgets = {
         }

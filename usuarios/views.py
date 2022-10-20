@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .forms import UsuarioForm
 # Create your views here.
 
+
 class UsuarioCreate(CreateView):
     template_name = "usuarios/form_registrar.html"
     form_class = UsuarioForm

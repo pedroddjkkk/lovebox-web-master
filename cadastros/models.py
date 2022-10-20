@@ -68,14 +68,16 @@ class Paciente(models.Model):
 
 class Medicamento(models.Model):
     nome_comercial = models.CharField(max_length=100)
-    laboratorio = models.CharField(max_length=100, verbose_name='Laboratório')
+    laboratorio = models.CharField(
+        max_length=100, verbose_name='Laboratório')
     principio_ativo = models.CharField(
         max_length=255, verbose_name='Princípio Ativo')
     dose_diaria_maxima = models.CharField(
         max_length=500, verbose_name='Dose Diária Máxima')
     forma_farmaceutica = models.CharField(
         max_length=255, verbose_name='Forma Farmacêutica')
-    concentracao = models.CharField(max_length=255, verbose_name='Concetração')
+    concentracao = models.CharField(
+        max_length=255, verbose_name='Concetração')
     via_administracao = models.CharField(
         max_length=255, verbose_name='Via Administração')
     grupo_etario = models.CharField(
@@ -83,7 +85,8 @@ class Medicamento(models.Model):
     tarja = models.CharField(max_length=50)
 
     def __str__(self):
-        return "{} {}".format(self.nome_comercial, self.concentracao)
+        return "{} {}".format(
+            self.nome_comercial, self.concentracao)
 
 
 class ProfissionalSaude(models.Model):
@@ -219,7 +222,8 @@ class Tratamento(models.Model):
 
 class DosesTratamento(models.Model):  # Falta alguns atributos
     lovebox = models.CharField(max_length=100)
-    horario_dose = models.DateTimeField
+    compartimento = models.IntegerField()
+    horario_dose = models.DateTimeField(null=True, blank=True)
     compartimento_caixa: models.CharField(max_length=25)
     tempo_alerta_especifico = models.IntegerField()
     status_ingestao = models.BooleanField(
@@ -243,3 +247,4 @@ class DosesTratamento(models.Model):  # Falta alguns atributos
     paciente = models.CharField(max_length=255)
     dosagem = models.CharField(max_length=255)
     medicamento = models.CharField(max_length=255)
+    um = models.CharField(max_length=3, default = 'mg')

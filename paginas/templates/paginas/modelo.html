@@ -78,10 +78,7 @@
                                 <li><a class="dropdown-item" href="{% url 'cadastrar-cuidador' %}">Cuidador</a></li>
                                 <li><a class="dropdown-item" href="{% url 'cadastrar-tratamento' %}">Tratamento</a></li>
                                 <li><a class="dropdown-item" href="{% url 'cadastrar-lovebox' %}">Lovebox</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-doses-tratamento' %}">Doses do Tratamento</a></li>
                             </ul>
                         </li>
 
@@ -99,12 +96,7 @@
                                 <li><a class="dropdown-item" href="{% url 'listar-cuidador' %}">Cuidadores</a></li>
                                 <li><a class="dropdown-item" href="{% url 'listar-tratamento' %}">Tratamentos</a></li>
                                 <li><a class="dropdown-item" href="{% url 'listar-lovebox' %}">Lovebox</a></li>
-
-
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-doses-tratamento' %}">Doses do Tratamento</a></li>
                             </ul>
                         </li>
                         {% endif %}
