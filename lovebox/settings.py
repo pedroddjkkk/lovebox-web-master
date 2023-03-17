@@ -27,8 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'http://127.0.0.1:8000/',
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost:8000',
+    'localhost',
+    'http://p7220v.vps-kinghost.net',
+    'p7220v.vps-kinghost.net',
     ]
+
+CSRF_TRUSTED_ORIGINS = ['http://p7220v.vps-kinghost.net']
 
 
 # Application definition
@@ -92,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'lovebox',
         'USER': 'postgres',
-        'PASSWORD': 'lovebox123',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '5432',
     }
