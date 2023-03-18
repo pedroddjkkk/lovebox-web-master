@@ -223,7 +223,7 @@ class Tratamento(models.Model):
 class DosesTratamento(models.Model):  # Falta alguns atributos
     lovebox = models.CharField(max_length=100)
     compartimento = models.IntegerField()
-    horario_dose = models.DateTimeField(null=True, blank=True)
+    horario_dose = models.TimeField(null=True, blank=True)
     compartimento_caixa: models.CharField(max_length=25)
     tempo_alerta_especifico = models.IntegerField()
     status_ingestao = models.BooleanField(
