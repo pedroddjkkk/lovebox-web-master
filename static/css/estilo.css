@@ -1,3 +1,9 @@
 .bg-marrom {
     background-color: brown;
 }
+
+@media screen and (max-width: 480px) {
+    #imagemLovebox {
+        width: 300px !important;
+    }
+}
